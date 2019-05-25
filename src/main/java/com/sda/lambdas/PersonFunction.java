@@ -10,4 +10,9 @@ import java.util.function.Function;
  */
 public class PersonFunction implements Function<Person, Person> {
 
+    @Override
+    public Person apply(Person person) {
+        person.setAge(person.getAge() + 1);
+        return person;
+    }
 }

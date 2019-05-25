@@ -20,7 +20,26 @@ public class OptionalsMain {
 
     public static void main(String[] args) {
         List<Person> persons = Person.createPersons();
+
+        Optional<Person> invalidPersonById = getPersonById("ADD", persons);
+        Optional<Person> validPersonById = getPersonById("Vlad", persons);
+
+        logMessage(invalidPersonById);
+        logMessage(validPersonById);
+    }
+
+    private static void logMessage(Optional<Person> personOptional) {
+        if (personOptional.isPresent()) {
+            System.out.println("Found person: " + personOptional.get().getFullName());
+        } else {
+            System.out.println("Didn't find the searched person");
+        }
     }
 
     //method goes here
+    private static Optional<Person> getPersonById(String name, List<Person> people) {
+        return people.stream()
+                .filter(person -> person.getFullName().equals(name))
+                .findFirst();
+    }
 }
